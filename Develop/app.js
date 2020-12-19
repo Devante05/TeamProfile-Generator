@@ -4,6 +4,9 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const util = require('util');
+
+const writeFileSync = util.promisify(fs.writeFile);
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -67,8 +70,13 @@ function getEmployee(type) {
         response.id,
         response.email,
         response.parameter,
+        
       );
-      employee_array.push(emp);
+
+     
+     
+
+    employee_array.push(emp);
       console.log(employee_array); // how do i move this 
 
      
@@ -87,6 +95,58 @@ function getEmployee(type) {
     
 }
 
+for (i =0; i < employee_array.length; i++) {
+    
+}
+
+
+const internCard =
+`<div class="card employee-card">
+<div class="card-header">
+    <h2 class="card-title">${employee_array[i].response.name}</h2>
+    <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>{{ role }}</h3>
+</div>
+<div class="card-body">
+    <ul class="list-group">
+        <li class="list-group-item">ID:${emp.response.id}</li>
+        <li class="list-group-item">Email: <a href="mailto:${emp.response.email}">${emp.response.email}</a></li>
+        <li class="list-group-item">School: ${emp.response.school}</li>
+    </ul>
+</div>
+</div> `
+ 
+    const engineerCard = 
+    `<div class="card employee-card">
+    <div class="card-header">
+        <h2 class="card-title">{{ name }}</h2>
+        <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>{{ role }}</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">ID: {{ id }}</li>
+            <li class="list-group-item">Email: <a href="mailto:{{ email }}">{{ email }}</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/{{ github }}" target="_blank" rel="noopener noreferrer">{{ github }}</a></li>
+        </ul>
+    </div>
+</div> `
+
+    const managerCard = 
+    `<div class="card employee-card">
+    <div class="card-header">
+        <h2 class="card-title">{{ name }}</h2>
+        <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>{{ role }}</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">ID: {{ id }}</li>
+            <li class="list-group-item">Email: <a href="mailto:{{ email }}">{{ email }}</a></li>
+            <li class="list-group-item">Office number: {{ officeNumber }}</li>
+        </ul>
+    </div>
+</div>`
+console.log(internCard)
+
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
@@ -94,7 +154,7 @@ function getEmployee(type) {
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 
-render(employee_array);
+// render(employee_array);
 
 
 // After you have your html, you're now ready to create an HTML file using the HTML
