@@ -96,7 +96,10 @@ function getEmployee(type) {
 }
 
 for (i =0; i < employee_array.length; i++) {
-    
+   appendCard = document.getElementById(`cardAppend`)
+   appendCard.innerHTML = internCard
+
+
 }
 
 
@@ -108,9 +111,9 @@ const internCard =
 </div>
 <div class="card-body">
     <ul class="list-group">
-        <li class="list-group-item">ID:${emp.response.id}</li>
-        <li class="list-group-item">Email: <a href="mailto:${emp.response.email}">${emp.response.email}</a></li>
-        <li class="list-group-item">School: ${emp.response.school}</li>
+        <li class="list-group-item">ID:${employee_array[i].response.id}</li>
+        <li class="list-group-item">Email: <a href="mailto:${employee_array[i].response.email}">${employee_array[i].response.email}</a></li>
+        <li class="list-group-item">School: ${employee_array[i].response.school}</li>
     </ul>
 </div>
 </div> `
