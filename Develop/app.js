@@ -30,8 +30,10 @@ const EMP_TYPE = {
 getEmployee("Intern")
 
 function getEmployee(type) {
+
   inquirer
     .prompt([
+
       {
         name: "name",
         type: "input",
@@ -52,18 +54,37 @@ function getEmployee(type) {
         type: "input",
         message: EMP_TYPE[type].prompt,
       },
+      {
+        name: "employeeType",
+        type: "list",
+        choices: ["Intern", "Engineer", "Manager", "No more Team members"],
+        message: "What employee type are you?"
+      },
     ])
     .then((response) => {
       const emp = new EMP_TYPE[type].constructor(
         response.name,
         response.id,
         response.email,
-        response.parameter
+        response.parameter,
       );
       employee_array.push(emp);
+      console.log(employee_array); // how do i move this 
 
-      console.log(employee_array);
-    });
+     
+     
+    if (response.employeeType === "Engineer") {
+        getEmployee("Engineer");
+    } 
+    if (response.employeeType === "Intern") {
+        getEmployee("Intern");
+    } 
+    if (response.employeeType === "Manager") {
+        getEmployee("Manager");
+    }
+});
+
+    
 }
 
 // Write code to use inquirer to gather information about the development team members,
@@ -72,6 +93,9 @@ function getEmployee(type) {
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+
+render(employee_array);
+
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
